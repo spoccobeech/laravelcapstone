@@ -17,6 +17,7 @@ class ProductsController extends Controller
         //return bufashproducts::all();
         $bufashproducts = Bufashproducts::all();
         return view('bufash/products/viewProducts', compact('bufashproducts'));
+        // ProductsController
     }
 
 
