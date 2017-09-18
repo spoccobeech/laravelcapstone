@@ -23,15 +23,16 @@ Route::get('/register', function () {
 Route::get('/', function () {
     return view('../bufash/homepage');
 });
-Route::get('/Products', function () {
-    return view('../bufash/products/productDetails');//, ['Product_name' => $prod_name, 'Product_type' => $prod_type, 'Product_quantity' => $prod_qty, 'Product_description' => $prod_desc, 'Product_price' => $prod_price]);
+// Route::get('/Products', function () {
+//    return view('../bufash/products/productDetails');//, ['Product_name' => $prod_name, 'Product_type' => $prod_type, 'Product_quantity' => $prod_qty, 'Product_description' => $prod_desc, 'Product_price' => $prod_price]);
     //->with(['Product_name' => $prod_name, 'Product_type' => $prod_type, 'Product_quantity' => $prod_qty, 'Product_description' => $prod_desc, 'Product_price' => $prod_price]);
-});
+
 Route::get('/aboutUs', function () {
     return view('../bufash/aboutUspage');
 });
-Route::group(['middleware' => ['auth']], function () {
-  Route::resource('CheckProducts', 'ProductsController');
+
+Route::group(['middleware' => ['auth']], function (){
+  Route::resource('Products', 'ProductsController');
 });
 
 Auth::routes();

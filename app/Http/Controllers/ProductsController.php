@@ -30,8 +30,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        // return view('bufash.products.addProduct'); // correct
-        // must return json response
+        return view('bufash.products.addProduct'); // correct
+        // console.log(response);
     }
 
     /**
@@ -42,7 +42,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-      //return view('bufash/products/viewProducts');
+      // return view('bufash/products/viewProducts');
       $bufashproducts = new Bufashproducts;
       $bufashproducts->id = $request->id;
       $bufashproducts->prod_name = $request->prod_name;
@@ -51,7 +51,8 @@ class ProductsController extends Controller
       $bufashproducts->prod_desc = $request->prod_desc;
       $bufashproducts->prod_price = $request->prod_price;
       $bufashproducts->save();
-      return redirect('bufash/products/indexProducts');
+      // return redirect('bufash/products/viewProducts');
+      return $bufashproducts->toJson();
     }
 
     /**
