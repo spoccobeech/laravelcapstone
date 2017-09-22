@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-
+     //$username = Auth::user();
+     //return response()->json($username);
     protected $redirectTo = '/home';
 
     /**
@@ -38,5 +41,11 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
         $response = array('success' == true);
         return response()->json($response);
+    }
+    public function update(Request $request)
+    {
+      $response = $request->user();
+      return response()->json($response);
+
     }
 }

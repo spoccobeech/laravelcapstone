@@ -14,7 +14,7 @@
       return view('../bufash/home');
   });
 });*/
-Route::get('/login', function () {
+Route::post('/login', function () {
     return view('../auth/login');
 });
 Route::get('/register', function () {
