@@ -12,7 +12,7 @@
         {{ csrf_field() }}
         <input type="text" name="prod_name" placeholder="Product name">
         <input type="text" name="prod_type" placeholder="Product Type">
-        <input type="text" name="prod_qty" placeholder="Quantity">
+        <input type="text" name="prod_qty"  placeholder="Quantity">
         <input type="text" name="prod_desc" placeholder="descripttion">
         <input type="text" name="prod_price" placeholder="product price">
         <input type="submit" name="addProduct">

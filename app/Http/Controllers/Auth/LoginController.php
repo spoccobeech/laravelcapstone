@@ -28,9 +28,12 @@ class LoginController extends Controller
      * @var string
      */
      //$username = Auth::user();
-     //return response()->json($username);
-    protected $redirectTo = '/home';
+     //return response()->json('$username');
 
+     public function loggedin()
+     {
+        return redirect()->route('login');
+     }
     /**
      * Create a new controller instance.
      *
@@ -44,8 +47,7 @@ class LoginController extends Controller
     }
     public function update(Request $request)
     {
-      $response = $request->user();
-      return response()->json($response);
-
+        $response = $request->user();
+        return response()->json($response);
     }
 }

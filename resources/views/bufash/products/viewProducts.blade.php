@@ -1,5 +1,7 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 @section('products')
+
+<template name="Products">
   <html>
     <head>
       <meta charset="utf-8">
@@ -43,4 +45,11 @@
       @endforeach
     </body>
   </html>
+</template>
+<script src="/js/components/products.js">
+
+</script>
+<style media="screen">
+
+</style>
 @endsection

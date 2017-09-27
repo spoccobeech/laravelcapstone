@@ -5,7 +5,7 @@ use App\Bufashproducts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
-// use Illuminate\Routing\ResponseFactory;
+
 class ProductsController extends Controller
 {
     /**
@@ -17,7 +17,7 @@ class ProductsController extends Controller
     {
         //return bufashproducts::all();
         $bufashproducts = Bufashproducts::all();
-        // return view('bufash/products/viewProducts', compact('bufashproducts'));
+        //return view('bufash/products/viewProducts', compact('bufashproducts'));
         // ProductsController
         return Response()->json(array('data' => $bufashproducts));
     }

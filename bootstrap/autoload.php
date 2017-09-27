@@ -16,7 +16,7 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
 
-use Ivory\GoogleMap;
+// use Ivory\GoogleMap;
 /*
 |--------------------------------------------------------------------------
 | Include The Compiled Class File
