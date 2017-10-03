@@ -1,5 +1,3 @@
-@extends('adminlte::page')
-@section('products')
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,8 +13,8 @@
         <input type="text" name="prod_qty"  placeholder="Quantity">
         <input type="text" name="prod_desc" placeholder="descripttion">
         <input type="text" name="prod_price" placeholder="product price">
+        <input type="file" name="prod_image"/>
         <input type="submit" name="addProduct">
     </form>
   </body>
 </html>
-@endsection

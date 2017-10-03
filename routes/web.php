@@ -1,9 +1,5 @@
 <?php
-/*Route::group(['middleware::auth'], function () {
-  Route::get('/home', function () {
-      return view('../bufash/home');
-  });
-});*/
+
 Route::get('/login', function () {
     return view('../auth/login');
 });
@@ -19,6 +15,12 @@ Route::get('/aboutUs', function () {
     // return Response()->json;
 });
 
+Route::get('/ProductDetails', function () {
+    $prodDetails = App\Bufashproducts::all();
+    return view('../bufash/products/productDetails', compact('prodDetails'));
+    // return Response()->json(array('data' => $prodDetails));
+});
+
 Route::group(['middleware' => ['auth']], function (){
   Route::resource('Products', 'ProductsController');
 });
@@ -26,7 +28,6 @@ Route::group(['middleware' => ['auth']], function (){
 Auth::routes();
 Route::get('/home', 'HomeController@index');
 
+Auth::routes();
 
-// Route::get('/Products', function () {
-// return view('../bufash/products/productDetails');//, ['Product_name' => $prod_name, 'Product_type' => $prod_type, 'Product_quantity' => $prod_qty, 'Product_description' => $prod_desc, 'Product_price' => $prod_price]);
-//->with(['Product_name' => $prod_name, 'Product_type' => $prod_type, 'Product_quantity' => $prod_qty, 'Product_description' => $prod_desc, 'Product_price' => $prod_price]);
+Route::get('/home', 'HomeController@index');

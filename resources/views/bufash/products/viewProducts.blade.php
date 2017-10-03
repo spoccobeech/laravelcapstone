@@ -1,7 +1,4 @@
-@extends('layouts.app')
-@section('products')
 
-<template name="Products">
   <html>
     <head>
       <meta charset="utf-8">
@@ -13,7 +10,7 @@
           <div class="col-md-3">
             <div class="">
               <div class="small-box bg-aqua">
-                <img src="../162.png" />
+                <img src="" alt="{{$bufashproduct->prod_image}}">
                 <img class='img-thumbnail'>
                 <div class="container">
                   <h3>{{$bufashproduct->prod_name}}</h3>
@@ -45,11 +42,3 @@
       @endforeach
     </body>
   </html>
-</template>
-<script src="/js/components/products.js">
-
-</script>
-<style media="screen">
-
-</style>
-@endsection

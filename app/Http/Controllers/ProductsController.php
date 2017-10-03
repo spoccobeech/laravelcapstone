@@ -8,38 +8,20 @@ use Illuminate\Support\Facades\Input;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //return bufashproducts::all();
         $bufashproducts = Bufashproducts::all();
         //return view('bufash/products/viewProducts', compact('bufashproducts'));
-        // ProductsController
         return Response()->json(array('data' => $bufashproducts));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('bufash.products.addProduct'); // correct
         // console.log(response);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
       // return view('bufash/products/viewProducts');
@@ -50,41 +32,24 @@ class ProductsController extends Controller
       $bufashproducts->prod_qty = $request->prod_qty;
       $bufashproducts->prod_desc = $request->prod_desc;
       $bufashproducts->prod_price = $request->prod_price;
+      $bufashproducts->prod_image = $request->prod_image;
       $bufashproducts->save();
       // return redirect('bufash/products/viewProducts');
       return $bufashproducts->toJson();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $bufashproducts = Bufashproducts::findOrFail($id);
         return view('bufash/products/viewProducts',compact('bufashproducts'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
       $bufashproducts = Bufashproducts::findOrFail($id);
       return view('bufash/products/editProducts',compact('bufashproducts'));
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
       // return view('bufash/products/editProducts');
@@ -93,12 +58,6 @@ class ProductsController extends Controller
       return redirect('/Products');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $bufashproducts = Bufashproducts::findOrFail($id);
@@ -106,4 +65,17 @@ class ProductsController extends Controller
         //return view('bufashaccts.allAccounts', compact('bfaccounts'));
         return redirect('/Products');
     }
+    public function ProductPicture(Request $request)
+      {
+      if($request->hasFile('prod_image'))
+      {
+        $bfProductPic = $request->file('prod_image');
+        $filename = /*time() . '.' . */ $prod_image->getClientOriginalName();
+        Image::make($prod_image)->resize(250,250)->save( public_path('/ProductPics/' .$filename));
+        $bufashproducts = new Bufashproducts;
+        $bufashproducts->prod_image = $filename;
+        $bufashproducts->save();
+      }
+      return redirect('/Products');
+      }
 }

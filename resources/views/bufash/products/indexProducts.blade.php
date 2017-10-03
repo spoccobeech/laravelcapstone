@@ -1,5 +1,4 @@
-@extends('adminlte::page')
-@section('products')
+
   <html>
     <head>
       <meta charset="utf-8">
@@ -11,7 +10,7 @@
           <div class="col-md-3">
             <div class="">
               <div class="small-box bg-aqua">
-                <img src="../162.png" />
+                <img src="{{$bufashproduct->prod_image}}" />
                 <img class='img-thumbnail'>
                 <div class="container">
                   <h3>{{$bufashproduct->prod_name}}</h3>
@@ -41,4 +40,3 @@
       @endforeach
     </body>
   </html>
-  @endsection

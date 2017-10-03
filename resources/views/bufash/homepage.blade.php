@@ -1,6 +1,10 @@
-@extends('adminlte::page')
-@section('homepage')
   <!DOCTYPE html>
+<nav class="navbar-nav">
+  <li><a href="#">home</a></li>
+  <li><a href="#">home</a></li>
+  <li><a href="#">home</a></li>
+  <li><a href="#">home</a></li>
+</nav>
   <html>
     <head>
       <meta charset="utf-8">
@@ -417,4 +421,3 @@
       </div>
     </body>
   </html>
-@endsection

@@ -1,5 +1,4 @@
-@extends('adminlte::page')
-@section('about')
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,4 +29,3 @@
     </script>
   </body>
 </html>
-@endsection

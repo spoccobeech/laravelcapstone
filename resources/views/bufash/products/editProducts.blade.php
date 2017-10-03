@@ -1,5 +1,3 @@
-@extends('adminlte::page')
-@section('products')
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,4 +19,3 @@
     </form>
   </body>
 </html>
-@endsection
