@@ -1,3 +1,5 @@
+@extends('layouts.main')
+@section('products')
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,13 +10,15 @@
     <h1>Add Product</h1>
     <form action="/Products" method='POST'>
         {{ csrf_field() }}
-        <input type="text" name="prod_name" placeholder="Product name">
-        <input type="text" name="prod_type" placeholder="Product Type">
-        <input type="text" name="prod_qty"  placeholder="Quantity">
-        <input type="text" name="prod_desc" placeholder="descripttion">
-        <input type="text" name="prod_price" placeholder="product price">
-        <input type="file" name="prod_image"/>
+        <input type="text" name="item_name" placeholder="Item name">
+        <input type="text" name="item_type" placeholder="Item Type">
+        <input type="text" name="item_size"  placeholder="Item Size">
+        <input type="text" name="item_qty"  placeholder="Item Quantity">
+        <input type="text" name="item_desc" placeholder="Item Description">
+        <input type="text" name="item_price" placeholder="Item Price">
+        <input type="file" name="item_image"/>
         <input type="submit" name="addProduct">
     </form>
   </body>
 </html>
+@endsection

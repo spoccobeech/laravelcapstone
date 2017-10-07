@@ -16,18 +16,14 @@ Route::get('/aboutUs', function () {
 });
 
 Route::get('/ProductDetails', function () {
-    $prodDetails = App\Bufashproducts::all();
+    $prodDetails = App\bufashItems::all();
     return view('../bufash/products/productDetails', compact('prodDetails'));
     // return Response()->json(array('data' => $prodDetails));
 });
 
 Route::group(['middleware' => ['auth']], function (){
-  Route::resource('Products', 'ProductsController');
+  Route::resource('Items', 'ItemsController');
 });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
+Route::get('/homepage', 'HomeController@index');

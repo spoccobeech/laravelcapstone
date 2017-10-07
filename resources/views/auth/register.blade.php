@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
 <div class="container">
@@ -58,6 +58,14 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="User Type" class="col-md-4 control-label">User Type</label>
+
+                          <div class="col-md-6">
+                              <input id="usertype" type="text" class="form-control" name="User Type" required>
+                          </div>
                         </div>
 
                         <div class="form-group">

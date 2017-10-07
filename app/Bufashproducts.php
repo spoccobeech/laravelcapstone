@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bufashproducts extends Model
 {
-    protected $fillable = ['prod_name', 'prod_type', 'prod_qty', 'prod_desc', 'prod_price' , 'updated_at', 'created_at'];
+    protected $fillable = ['item_name', 'item_type', 'item_size', 'item_qty', 'item_desc', 'item_price' , 'updated_at', 'created_at'];
 }

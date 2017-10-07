@@ -1,3 +1,5 @@
+@extends('layouts.main')
+@section('products')
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,12 +12,14 @@
     <form action="/Products/{{$bufashproducts->id}}" method="post">
         {{ method_field('PUT') }}
         {{ csrf_field() }}
-          <input type="text" name="prod_name" value="{{ $bufashproducts->prod_name }}">
-          <input type="text" name="prod_type" value="{{ $bufashproducts->prod_type }}">
-          <input type="text" name="prod_qty" value="{{ $bufashproducts->prod_qty }}">
-          <input type="text" name="prod_desc" value="{{ $bufashproducts->prod_desc }}">
-          <input type="text" name="prod_price" value="{{ $bufashproducts->prod_price }}">
+          <input type="text" name="item_name" value="{{ $bufashproducts->item_name }}">
+          <input type="text" name="item_type" value="{{ $bufashproducts->item_type }}">
+          <input type="text" name="item_size" value="{{ $bufashproducts->item_size }}">
+          <input type="text" name="item_qty" value="{{ $bufashproducts->item_qty }}">
+          <input type="text" name="item_desc" value="{{ $bufashproducts->item_desc }}">
+          <input type="text" name="item_price" value="{{ $bufashproducts->item_price }}">
           <input type="submit" name="updateProduct" value="update">
     </form>
   </body>
 </html>
+@endsection

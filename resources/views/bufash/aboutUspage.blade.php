@@ -1,4 +1,5 @@
-
+@extends('layouts.main')
+@section('abouts')
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,3 +30,4 @@
     </script>
   </body>
 </html>
+@endsection

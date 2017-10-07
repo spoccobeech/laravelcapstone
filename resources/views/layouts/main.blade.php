@@ -12,25 +12,67 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
+      <div class="collapse navbar-collapse" >
+        <ul class="nav nav-pills justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('/homepage')}}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('Products')}}">Products</a>
+            <a class="nav-link" href="{{url('Items')}}">Items</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{url('/aboutUs')}}">About</a>
           </li>
+          @if(Auth::guest())
+          <li class="nav-item">
+            <a href="{{ url('/login') }}" class="nav-link">Login</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/register') }}" class="nav-link">Register</a>
+          </li>
+          @else
+            @if(Auth::user()->usertype == "client")
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu">
+                  <a href="#" class="nav-link">Purchase Metrics</a>
+                  <a href="#" class="nav-link">Inventory</a>
+                  <a href="#" class="nav-link">Client Profile</a>
+                  <a href="{{ url('/logout') }}" class="dropdown-item nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                           <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                               {{ csrf_field() }}
+                           </form>
+                </div>
+              </li>
+              @elseif(Auth::user()->usertype == "customer")
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu">
+                  <a href="#" class="nav-link">Wishlist</a>
+                  <a href="#" class="nav-link">Profile</a>
+                  <a href="{{ url('/logout') }}" class="dropdown-item nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                           <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                               {{ csrf_field() }}
+                           </form>
+                </div>
+              </li>
+            @endif
+          @endif
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </div>
     </nav>
-
-    @yield('home')
+    <div class="container" >
+      @yield('home')
+      @yield('products')
+      @yield('abouts')
+      @yield('content')
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
-
+@extends('layouts.main')
+@section('products')
   <html>
     <head>
       <meta charset="utf-8">

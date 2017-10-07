@@ -15,11 +15,12 @@ class bufashproducts extends Migration
     {
       Schema::create('bufashproducts', function (Blueprint $table) {
           $table->increments('id');
-          $table->string('prod_name');
-          $table->string('prod_type');
-          $table->string('prod_qty');
-          $table->string('prod_desc');
-          $table->string('prod_price');
+          $table->string('item_name');
+          $table->string('item_type');
+          $table->string('item_size');
+          $table->string('item_qty');
+          $table->string('item_desc');
+          $table->string('item_price');
           $table->rememberToken();
           $table->timestamps();
       });

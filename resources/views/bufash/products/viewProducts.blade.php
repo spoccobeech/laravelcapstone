@@ -1,4 +1,5 @@
-
+@extends('layouts.main')
+@section('products')
   <html>
     <head>
       <meta charset="utf-8">
@@ -10,12 +11,12 @@
           <div class="col-md-3">
             <div class="">
               <div class="small-box bg-aqua">
-                <img src="" alt="{{$bufashproduct->prod_image}}">
+                <img src="" alt="{{$bufashproduct->item_image}}">
                 <img class='img-thumbnail'>
                 <div class="container">
-                  <h3>{{$bufashproduct->prod_name}}</h3>
-                      <h2>{{$bufashproduct->prod_type}}</h2> | <h2>{{$bufashproduct->prod_qty}}</h2>
-                  <textarea name="description" class="col-md-3">{{$bufashproduct->prod_desc}}</textarea>
+                  <h3>{{$bufashproduct->item_name}}</h3>
+                      <h2>{{$bufashproduct->item_type}}</h2> | <h2>{{$bufashproduct->item_qty}}</h2>
+                  <textarea name="description" class="col-md-3">{{$bufashproduct->item_desc}}</textarea>
                 </div>
                 <div class="container-fluid">
                   @if ($bufashproduct->id)
@@ -42,3 +43,4 @@
       @endforeach
     </body>
   </html>
+@endsection

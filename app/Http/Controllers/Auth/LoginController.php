@@ -22,15 +22,9 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-     //$username = Auth::user();
-     //return response()->json('$username');
+    protected $redirectTo = '/homepage';
 
-     public function loggedin()
+    public function loggedin()
      {
         return redirect()->route('login');
      }
