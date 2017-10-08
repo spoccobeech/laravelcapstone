@@ -16,13 +16,19 @@ Route::get('/aboutUs', function () {
 });
 
 Route::get('/ProductDetails', function () {
-    $prodDetails = App\bufashItems::all();
-    return view('../bufash/products/productDetails', compact('prodDetails'));
-    // return Response()->json(array('data' => $prodDetails));
+    $itemDetails = App\BufashItems::all();
+    // return view('../bufash/products/productDetails', compact('prodDetails'));
+    return Response()->json(array('data' => $itemDetails));
 });
 
+Route::post('Items', function() {
+  $path = $request->file($item_image)->store('ProductPics');
+  return $path;
+});
+
+Route::resource('Items', 'ItemsController');
 Route::group(['middleware' => ['auth']], function (){
-  Route::resource('Items', 'ItemsController');
+
 });
 
 Auth::routes();
