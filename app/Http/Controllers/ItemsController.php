@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\BufashItems;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
 
@@ -10,9 +11,8 @@ class ItemsController extends Controller
 {
     public function index()
     {
-        //return bufashitems::all();
-        // $BufashItems = bufashitems::all();
-        $bufashItems = BufashItems::all();
+        //return bufashItems::all();
+        $bufashItems = Bufashitems::all();
         //return view('bufash/products/viewProducts', compact('bufashItems'));
         return Response()->json(array('data' => $bufashItems));
     }
@@ -34,7 +34,7 @@ class ItemsController extends Controller
       $bufashItems->item_qty = $request->item_qty;
       $bufashItems->item_desc = $request->item_desc;
       $bufashItems->item_price = $request->item_price;
-      $bufashItems->item_image = $request->item_image;
+      // $bufashItems->item_image = $request->item_image;
       $bufashItems->save();
       // return redirect('bufash/products/viewProducts');
       return $bufashItems->toJson();
@@ -42,7 +42,7 @@ class ItemsController extends Controller
 
     public function show($id)
     {
-        $bufashItems = BufashItems::findOrFail($id);
+        $bufashItems = bufashItems::findOrFail($id);
         // return view('bufash/products/viewProducts',compact('bufashItems'));
         return Response()->json(array('data' => $bufashItems));
     }
@@ -59,9 +59,10 @@ class ItemsController extends Controller
       // return view('bufash/products/editProducts');
       $bufashItems = BufashItems::findOrFail($id);
       $bufashItems->update($request->all());
+      $path = request()->file('item_image')->store('public');
+      return $path;
       return redirect('/Items');
     }
-
 
     public function destroy($id)
     {
@@ -72,16 +73,14 @@ class ItemsController extends Controller
     }
     public function ProductPicture(Request $request)
       {
-        if($request->hasFile('item_image'))
-        {
-          $bfItemPic = $request->file('item_image');
-          $filename = /*time() . '.' .  */$bfItemPic->getClientOriginalName();
-          Image::make($bfItemPic)->resize(250,250)->save( public_path('/ProductPics/' .$filename));
-          // bufashItems::create($request->all());
-          $bufashItems = new BufashItems();
-          $bufashItems->item_picture = $filename;
-          $bufashItems->save();
-        }
-      return redirect('/Items');
-    }
+        $product = bufashItems::create($request->all());
+          foreach ($request->item_image as $photo) {
+              $filename = $photo->store('public');
+              bufashItems::create([
+                  'item_id' => $item->id,
+                  'filename' => $filename
+              ]);
+          }
+          return 'Upload successful!';
+      }
 }

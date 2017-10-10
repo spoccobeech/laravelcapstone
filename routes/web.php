@@ -21,11 +21,6 @@ Route::get('/ProductDetails', function () {
     return Response()->json(array('data' => $itemDetails));
 });
 
-Route::post('Items', function() {
-  $path = $request->file($item_image)->store('ProductPics');
-  return $path;
-});
-
 Route::resource('Items', 'ItemsController');
 Route::group(['middleware' => ['auth']], function (){
 
