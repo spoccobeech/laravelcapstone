@@ -34,9 +34,10 @@ class ItemsController extends Controller
       $bufashItems->item_qty = $request->item_qty;
       $bufashItems->item_desc = $request->item_desc;
       $bufashItems->item_price = $request->item_price;
-      // $bufashItems->item_image = $request->item_image;
-      $bufashItems->save();
+      $path = $request->file('item_image')->store('images');
       // return redirect('bufash/products/viewProducts');
+      $bufashItems->save();
+      return Response()->json($path);
       return $bufashItems->toJson();
     }
 
@@ -59,8 +60,6 @@ class ItemsController extends Controller
       // return view('bufash/products/editProducts');
       $bufashItems = BufashItems::findOrFail($id);
       $bufashItems->update($request->all());
-      $path = request()->file('item_image')->store('public');
-      return $path;
       return redirect('/Items');
     }
 
@@ -71,16 +70,4 @@ class ItemsController extends Controller
         //return view('bufashaccts.allAccounts', compact('bfaccounts'));
         return redirect('/Items');
     }
-    public function ProductPicture(Request $request)
-      {
-        $product = bufashItems::create($request->all());
-          foreach ($request->item_image as $photo) {
-              $filename = $photo->store('public');
-              bufashItems::create([
-                  'item_id' => $item->id,
-                  'filename' => $filename
-              ]);
-          }
-          return 'Upload successful!';
-      }
 }

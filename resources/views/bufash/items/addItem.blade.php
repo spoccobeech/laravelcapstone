@@ -8,7 +8,7 @@
   </head>
   <body>
     <h1>Add Product</h1>
-    <form action="/Items" method='POST'>
+    <form action="/Items" method='POST' enctype="multipart/form-data">
         {{ csrf_field() }}
         <input type="text" name="item_name" placeholder="Item name">
         <input type="text" name="item_type" placeholder="Item Type">
