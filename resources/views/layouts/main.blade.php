@@ -18,7 +18,7 @@
             <a class="nav-link" href="{{url('/homepage')}}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('Items')}}">Items</a>
+            <a class="nav-link" href="{{url('ItemsToShop')}}">Items</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{url('/aboutUs')}}">About</a>
@@ -38,7 +38,7 @@
                 </a>
                 <div class="dropdown-menu">
                   <a href="#" class="nav-link">Purchase Metrics</a>
-                  <a href="#" class="nav-link">Inventory</a>
+                  <a href="{{url('/Items')}}" class="nav-link">Inventory</a>
                   <a href="#" class="nav-link">Client Profile</a>
                   <a href="{{ url('/logout') }}" class="dropdown-item nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -70,6 +70,7 @@
       @yield('products')
       @yield('abouts')
       @yield('content')
+      @yield('itemPurchase')
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>

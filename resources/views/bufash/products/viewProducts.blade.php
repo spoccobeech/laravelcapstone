@@ -7,30 +7,32 @@
     </head>
     <body>
       <h1>Products</h1>
-      @foreach ($bufashItems as $bufashItem)
+      @foreach ($bufashproducts as $bufashproduct)
           <div class="col-md-3">
             <div class="">
               <div class="small-box bg-aqua">
-                <img src="{{$bufashItem->prod_image}}" />
+                <img src="" alt="{{$bufashproduct->item_image}}">
                 <img class='img-thumbnail'>
                 <div class="container">
-                  <h3>{{$bufashItem->item_name}}</h3>
-                      <h2>{{$bufashItem->item_type}}</h2> | <h2>{{$bufashItem->item_qty}}</h2>
-                  <textarea name="description" class="col-md-3">{{$bufashItem->item_desc}}</textarea>
+                  <h3>{{$bufashproduct->item_name}}</h3>
+                      <h2>{{$bufashproduct->item_type}}</h2> | <h2>{{$bufashproduct->item_qty}}</h2>
+                  <textarea name="description" class="col-md-3">{{$bufashproduct->item_desc}}</textarea>
                 </div>
-                <div class="container">
-                  @if ($bufashItem->id)
-                    <form action="{{ url("/Products/$bufashItem->id") }}" method="POST">
+                <div class="container-fluid">
+                  @if ($bufashproduct->id)
+                    <form action="{{ url("/Products/$bufashproduct->id") }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        <a href="/Items">
+                        <a href="/Products">
                             <input type="submit" name="deleteProduct" value="delete">
                         </a>
                     </form> |
                   @endif
-                    <a href="/Products/{{ $bufashItem->id }}/edit">
-                      <input type="submit" name="editProduct" value="edit">
-                    </a>
+                    <form class="" action="/Products/{{ $bufashproduct->id }}/edit" method="GET">
+                      <a>
+                        <input type="submit" name="editProduct" value="edit">
+                      </a>
+                    </form>
                 </div>
                 <a href="#" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
