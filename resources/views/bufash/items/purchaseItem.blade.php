@@ -10,10 +10,10 @@
       <div class="container">
           @foreach($bufashItems as $bufashItem)
           <div class="col-md-6 col-sm-4">
-            <div class="">
               <div class="small-box bg-aqua">
-                <img src="{{$bufashItem->item_image}}" />
-                <img class='img-thumbnail'>
+                @if($bufashItem->id)
+                  <img src="{{Storage::disk('local')->url($bufashItem->item_image)}}" style="width:50px;height:50px;"/>
+                @endif
                 <div class="container">
                   <h3>{{$bufashItem->item_name}}</h3>
                   <h2>{{$bufashItem->item_type}}</h2> | <h2>{{$bufashItem->item_qty}}</h2>
@@ -28,7 +28,6 @@
                 </div>
               </div>
             </div>
-          </div>
           @endforeach
         </div>
     </body>

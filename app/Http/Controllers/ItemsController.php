@@ -27,8 +27,8 @@ class ItemsController extends Controller
     }
     public function create()
     {
-        return view('bufash.items.addItem'); // correct
-        // console.log(response);
+      return view('bufash.items.addItem'); // correct
+      // console.log(response);
     }
 
     public function store(Request $request)
@@ -44,41 +44,48 @@ class ItemsController extends Controller
       $bufashItems->item_price = $request->item_price;
       $bufashItems->item_image = $request->item_image;
 
-      $newFolder = 'itemImg_ ' .  $request->id;
-      $imgDir = '/images/ ' . $newFolder;
-      Storage::makeDirectory($imgDir, 755, true ); // create directory
+      // ------- CREATE A NEW DIRECTORY ----------
+      // $newFolder = 'itemImg_ ' .  $request->id;
+      // $imgDir = '/images/ ' . $newFolder;
+      // Storage::makeDirectory($imgDir, 755, true ); // create directory
+      // -----------------------------------------
 
-      if(Input::hasFile('item_image'))
-        {
-            $imgFile = Input::file('item_image');
-            $imgFile->move('../storage/app/images', $imgFile->getClientOriginalName());
-            echo '<img src="../storage/app/images/'. $imgFile->getClientOriginalName() . '"/>';
-        }
-      // Image::make(Input::file('item_image'))->resize(300, 200)->save('images');
       // $path = $request->file('item_image')->store('images');
-      // return redirect('bufash/products/viewProducts');
-      // return Image::make('item_image')->response('jpg');
+      // --------- SAVE IMAGE TO RESOURCE FOLDER AND SAVE PATH TO LOCAL DB --------------
+       if ($request->file('item_image')->isValid()){
+        $imagePath = $request->file('item_image')->store('public');
+        $image = Image::make(Storage::get($imagePath))->resize(400,400)->encode();
+        Storage::put($imagePath,$image);
+
+        $imagePath = explode('/',$imagePath);
+        $imagePath = $imagePath[1];
+
+        $bufashItems->item_image = $imagePath;
+        }
+
+        // return $images->toJson();
+        // -------------------------------------------------------------------------------
       $bufashItems->save();
 
       // ------------- JSON RESPONSE ---------------
       // return Response()->json();
       // return $bufashItems->toJson();
-
       return redirect('ItemsToShop');
     }
 
     public function show($id)
     {
       $bufashItems = bufashItems::findOrFail($id);
-      // return view('../bufash/items/viewItems' , compact('bufashItems'));
-      return Response()->json(array('data' => $bufashItems));
+      return view('../bufash/items/viewItems' , compact('bufashItems'));
+      // $images = DB::table('item_image')->whereIn('id', $bufashItems->id)->get(); // not fixed
+      // return Response()->json(array('data' => $bufashItems));
     }
 
     public function edit($id)
     {
       $bufashItems = BufashItems::findOrFail($id);
-      // return view('bufash/products/editProducts',compact('bufashItems'));
-      return Response()->json(array('data' => $bufashItems));
+      return view('../bufash/items/editItem',compact('bufashItems'));
+      // return Response()->json(array('data' => $bufashItems));
     }
 
     public function update(Request $request, $id)
@@ -91,12 +98,16 @@ class ItemsController extends Controller
 
     public function destroy($id)
     {
-      $bufashItems = bufashItems::findOrFail($id);
+      $bufashItems = BufashItems::findOrFail($id);
       $bufashItems->delete();
       //return view('bufashaccts.allAccounts', compact('bfaccounts'));
       return redirect('/Items');
     }
 
-    // public function saveImage()
+     public function showImage(Request $request)
+    {
+      $bufashItems = BufashItems::with('item_image')->get();
+      return view('ItemstoShop')->with(['itemImage' => $bufashItems]);
+    }
 
 }

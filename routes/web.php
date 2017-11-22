@@ -21,12 +21,12 @@
   Route::get('ItemsToShop', function() {
     $bufashItems = App\BufashItems::all();
     // return $item_image->response('jpg');
-
-    return view('../bufash/items/purchaseItem', compact('bufashItems'));
+    // $content = Storage::get('$item_image');
     // return Response()->json(array('data' => $bufashItems));
+    return view('../bufash/items/purchaseItem', compact('bufashItems'));
   });
 
-  Route::post('ItemsToShop', 'ItemsController@store');
+  // Route::post('itemDetails/{id}', 'ItemsController@showImage');
 
   Route::get('itemDetails/{id}', function($id) {
       $itemDetails = App\BufashItems::findOrFail($id);
@@ -36,8 +36,26 @@
 
   Route::group(['middleware' => ['auth']], function (){
       Route::resource('Items', 'ItemsController');
-
   });
 
   Auth::routes();
   Route::get('/homepage', 'HomeController@index');
+
+  /* Route::get('/itemDetails/{item_image}', function($item_image)
+  {
+    $path = resource_path() . '/storage/app/images/' . $$item_image;
+
+    if(!File::exists($path)) {
+        return response()->json(['message' => 'Image not found.'], 404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    console.log($response);
+  }); */
+
+    // Route::post('ItemsToShop', 'ItemsController@showImage');

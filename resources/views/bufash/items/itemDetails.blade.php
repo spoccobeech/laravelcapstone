@@ -10,8 +10,9 @@
       <div class="col-md-6 col-sm-4">
         <div class="">
           <div class="small-box bg-aqua">
-            <img src="../storage/app/images/itemImg_/{{$itemDetails->item_image}}" />
-            <img class='img-thumbnail'>
+            @if($itemDetails->id)
+              <img src="{{Storage::disk('local')->url($itemDetails->item_image)}}"/>
+            @endif
             <div class="container">
               <h3>{{$itemDetails->item_name}}</h3>
               <h2>{{$itemDetails->item_type}}</h2> | <h2>{{$itemDetails->item_qty}}</h2>

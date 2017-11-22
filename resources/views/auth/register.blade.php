@@ -1,5 +1,4 @@
 @extends('layouts.main')
-
 @section('content')
 <div class="container">
     <div class="row">
@@ -60,13 +59,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                          <label for="User Type" class="col-md-4 control-label">User Type</label>
+                        <!--div class="form-group{{ $errors->has('usertype') ? ' has-error' : '' }}">
+                          <label for="usertype" class="col-md-4 control-label">User Type</label>
 
                           <div class="col-md-6">
                               <input id="usertype" type="text" class="form-control" name="User Type" required>
+
+                              @if ($errors->has('usertype'))
+                                  <span class="help-block">
+                                      <strong>{{ $errors->first('usertype') }}</strong>
+                                  </span>
+                              @endif
                           </div>
-                        </div>
+                        </div-->
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
