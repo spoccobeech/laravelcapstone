@@ -2,28 +2,31 @@
 
 namespace App\Http\Controllers;
 use App\BufashItems;
+use App\BufashCart;
+// use App\Http\Controllers\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
+use Cart;
 use Image;
 use Illuminate\Support\Facades\DB;
-
+use Session;
 
 class ItemsController extends Controller
 {
     public function index()
     {
       // return bufashItems::all();
-      $bufashItems = Bufashitems::all();
+      $bufashItems = BufashItems::all();
       return view('bufash/items/viewItems', compact('bufashItems'));
 
       // ----------- OTHER POSSIBLE OUTPUTS ----------------- //
       // return Response()->json(array('data' => $bufashItems));
       // $bufashItems = Bufashitems::findOrFail($id);
       // $results = DB::select('select * from bufash_items where id = :id', ['id' => $bufashItems->id ]);
-      // return view('../bufash/items/itemDetails', compact('$results'));
+      // return view('../bufash/items/itemInfo', compact('$results'));
     }
     public function create()
     {
@@ -62,9 +65,8 @@ class ItemsController extends Controller
 
         $bufashItems->item_image = $imagePath;
         }
-
         // return $images->toJson();
-        // -------------------------------------------------------------------------------
+      // --------------------------------------------------------------------------------
       $bufashItems->save();
 
       // ------------- JSON RESPONSE ---------------
@@ -75,7 +77,7 @@ class ItemsController extends Controller
 
     public function show($id)
     {
-      $bufashItems = bufashItems::findOrFail($id);
+      $bufashItems = BufashItems::findOrFail($id); //bufashItems::findOrFail($id);
       return view('../bufash/items/viewItems' , compact('bufashItems'));
       // $images = DB::table('item_image')->whereIn('id', $bufashItems->id)->get(); // not fixed
       // return Response()->json(array('data' => $bufashItems));
@@ -106,8 +108,33 @@ class ItemsController extends Controller
 
      public function showImage(Request $request)
     {
-      $bufashItems = BufashItems::with('item_image')->get();
-      return view('ItemstoShop')->with(['itemImage' => $bufashItems]);
+      // $bufashItems = BufashItems::with('item_image')->get();
+      // return view('ItemstoShop')->with(['itemImage' => $bufashItems]);
     }
 
+    public function addtoCart(Request $request, $id)
+    {
+      $bufashItems = BufashItems::find($id);
+      $oldcart = Session::has('cart') ? Session::get('cart') : null;
+      $cart = new BufashCart($oldcart);
+      $cart->add($bufashItems, $bufashItems->id);
+
+      $request->session()->put('cart', $cart);
+      dd($request->session()->get('cart', $cart));
+      // return Response()->json();
+    }
+
+    public function getCart()
+    {
+      Cart::content();
+      if(!Session::has('cart'))
+      {
+          return view('bufash.items.itemCart');
+      }
+      $oldcart = Session::get('cart');
+      $cart = new BufashCart($oldcart);
+      // return view('/itemCart', ['BufashItems' => $cart->BufashItems,  'totalPrice' => $cart->totalPrice]);
+      return Response()->json();
+
+    }
 }
