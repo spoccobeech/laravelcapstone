@@ -22,11 +22,11 @@
           </div>
           <div class="container">
             @if($itemInfo->id)
-            <a href="{{ url('Cart.index') }}"> <!--  href="{{url("/itemInfo/$itemInfo->id")}}" {{url("/itemCart/{$itemInfo->id}")}}  -->
-              <input type="submit"  name="store" value="Add to Cart">
+            <a href="{{ url("/itemCart/{$itemInfo->id}") }}"> <!--  href="{{url("/itemInfo/$itemInfo->id")}}" {{url("/itemCart/{$itemInfo->id}")}}  -->
+              <input type="submit" name="addCart" value="Add to Cart">
             </a> |
-            <a href="#">
-              <input type="submit" name="Wishlist" value="Add to Wishlist">
+            <a href="{{ url("/wishlist") }}">
+              <input type="submit" name="wishlist" value="Add to Wishlist">
             </a>
             @endif
           </div>

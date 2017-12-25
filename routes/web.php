@@ -33,21 +33,24 @@
 
   Route::group(['middleware' => ['auth']], function (){
       Route::resource('Items', 'ItemsController');
+      // Route::resource('Cart', 'CartController');
 
-      Route::resource('Cart', 'CartController');
-      /*
       Route::get('itemCart/{id}', [
-         'uses' => 'CartController@addCart'// 'CartController@addCart '
+         'uses' => 'CartItemController@store'// 'CartController@addCart '
       ]);
 
       Route::get('/itemCart', [
-         'uses' => 'CartController@checkCart'// 'CartController@checkCart  ItemsController@getCart'
+         'uses' => 'CartItemController@index'// 'CartController@checkCart  ItemsController@getCart'
       ]);
 
       Route::get('/checkOutCart', [
-         'uses' => 'CartController@checkOut'// 'CartController@checkCart  ItemsController@getCart'
+         'uses' => 'CartItemController@checkOut'// 'CartController@checkCart  ItemsController@getCart'
       ]);
-      */
+
+      Route::get('/wishlist', [
+         'uses' => 'CartItemController@wishlist'// 'CartController@checkCart  ItemsController@getCart'
+      ]);
+
   });
 
   Auth::routes();

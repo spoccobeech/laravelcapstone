@@ -39,8 +39,7 @@
                         <td>{{$cartItem->qty}}</td>
                         <td>{{$cartItem->price}}</td>
                         <td>{{$cartItem->options->has('size') ? $cartItem->options->size : ''}}</td>
-                        <td><button type="submit" name="cancelCart" class="btn btn-sm btn-danger"> Delete Item </button></td>
-                        <td><button type="submit" name="updateCart" class="btn btn-sm btn-success"> Update Item </button></td>
+                        <td><button type="submit" name="updateCart" class="btn btn-sm btn-success"><a href="#">Update Item</a></button></td>
                       </tr>
                     </tbody>
                   </table>

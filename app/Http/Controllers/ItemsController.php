@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\BufashItems;
-use App\BufashCart;
+// use App\BufashCart;
 // use App\Http\Controllers\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -52,8 +52,8 @@ class ItemsController extends Controller
       // $imgDir = '/images/ ' . $newFolder;
       // Storage::makeDirectory($imgDir, 755, true ); // create directory
       // -----------------------------------------
-
       // $path = $request->file('item_image')->store('images');
+
       // --------- SAVE IMAGE TO RESOURCE FOLDER AND SAVE PATH TO LOCAL DB --------------
        if ($request->file('item_image')->isValid()){
         $imagePath = $request->file('item_image')->store('public');
