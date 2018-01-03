@@ -1,31 +1,17 @@
 @extends('layouts.main')
 @section('cart')
   <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Purchase Item</title>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>Purchase Item</title>
+      </head>
       <body>
-    </head>
-      <div class="container">
-        @foreach(Cart::content() as $cartItem)
-              <!--div class="small-box bg-aqua">
-                @if($cartItem->id)
-                  <img src="{{Storage::disk('local')->url($cartItem->item_image)}}" style="width:50px;height:50px;"/>
-                @endif
-              </div-->
-                <!--div class="container">
-                  <h3>Item : {{$cartItem->name}}</h3>
-                  <h2>Item size : {{$cartItem->options->has('size') ? $cartItem->options->size : ''}}</h2>
-                  <h2>price : {{$cartItem->price}} </h2>
-                  <h2>quantity : {{$cartItem->qty}}</h2>
-                  <textarea name="description" class="col-md-3" style="width:320px;height:50px;">{{$cartItem->item_desc}}</textarea>
-                </div-->
                 <div class="container">
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Item Name</th>
                         <th scope="col">Item Quantity</th>
                         <th scope="col">Item Price</th>
@@ -33,42 +19,31 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach(Cart::content() as $cartItem)
                       <tr>
                         <td><img src="{{Storage::disk('local')->url($cartItem->options->has('image') ? $cartItem->options->image : '')}}" style="width:50px;height:50px;"/></td>
                         <td>{{$cartItem->name}}</td>
                         <td>{{$cartItem->qty}}</td>
                         <td>{{$cartItem->price}}</td>
                         <td>{{$cartItem->options->has('size') ? $cartItem->options->size : ''}}</td>
-                        <td><button type="submit" name="cancelCart" class="btn btn-sm btn-danger"> Delete Item </button></td>
-                        <td><button type="submit" name="updateCart" class="btn btn-sm btn-success"> Update Item </button></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                    <!--div class="container">
-                      @if($cartItem->id)
-                      <a href="{{ url('checkOut')}}">
-                        <input type="submit" name="show" value="Proceed To Checkout">
-                      </a>
-                      <button type="submit" name="cancel" class="btn btn-danger">Cancel Cart</button>
-                      @endif
-                    </div-->
-                  <!--table>
-                    <tfoot class="container">
-                      <tr>
                         <td>
-                          @if($cartItem->id)
-                          <a href="{{ url('checkOut')}}">
-                            <input type="submit" name="show" value="Proceed To Checkout">
-                          </a>
-                          <button type="submit" name="cancel" class="btn btn-danger">Cancel Cart</button>
+                          @if ($cartItem->id)
+                            <form action="{{ route('Cart.destroy', $cartItem->rowId) }}" method="POST">
+                              {{ csrf_field() }}
+                              {{ method_field('DELETE') }}
+                                <button type="submit" name="Delete" value="Delete Cart" class="btn btn-sm btn-danger">Delete Cart</button>
+                            </form>
                           @endif
                         </td>
+                        <td><a href="{{ url("Cart/{$cartItem->id}/edit") }}"> <button type="submit" name="updateCart" class="btn btn-sm btn-success">Update Cart</button></a></td>
                       </tr>
-                    </tfoot>
-                  </table-->
+                      @endforeach
+                    </tbody>
+                  </table>
+                  <a href="{{ url('checkout') }}">
+                    <button type="submit" name="Checkout" class="btn btn-sm btn-info pull-right">Proceed to Checkout</button>
+                  </a>
               </div>
-        </div>
     </body>
   </html>
-  @endforeach
 @endsection

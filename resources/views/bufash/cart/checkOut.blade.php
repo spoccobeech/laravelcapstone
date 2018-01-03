@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Add Product</title>
+    <title>Checkout</title>
   </head>
   <body>
 
