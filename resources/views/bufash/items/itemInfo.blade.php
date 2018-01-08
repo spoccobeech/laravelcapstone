@@ -21,15 +21,19 @@
           </div>
           <div class="container">
             @if($itemInfo->id)
-            <a href="{{ url("/itemCart/{$itemInfo->id}") }}"> <!--  href="{{url("/itemInfo/$itemInfo->id")}}" {{url("/itemCart/{$itemInfo->id}")}}  -->
-              <input type="submit" name="addCart" value="Add to Cart">
-            </a>
+              @if($itemInfo->item_qty <= 0)
+                <a href="{{ url("/itemCart/{$itemInfo->id}") }}"> <!--  href="{{url("/itemInfo/$itemInfo->id")}}" {{url("/itemCart/{$itemInfo->id}")}}  -->
+                  <button type="submit" name="addCart" class="btn btn-default" disabled value="Add to Cart">Add to Cart</button>
+                </a>
+              @else
+                <a href="{{ url("/itemCart/{$itemInfo->id}") }}"> <!--  href="{{url("/itemInfo/$itemInfo->id")}}" {{url("/itemCart/{$itemInfo->id}")}}  -->
+                  <button type="submit" name="addCart" class="btn btn-info" value="Add to Cart">Add to Cart</button>
+                </a>
+              @endif
             @endif
-
             <a href="{{ url("/wishlist/{$itemInfo->id}") }}">
               <input type="submit" name="wishlist" value="Add to Wishlist">
             </a>
-
           </div>
         </div>
       </div>

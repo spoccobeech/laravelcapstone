@@ -18,8 +18,11 @@
                   <h3>Item : {{$bufashItem->item_name}}</h3>
                   <h2>Item Type :{{$bufashItem->item_type}}</h2>
                   <h2>price :{{$bufashItem->item_price}}</h2>
-                  <h2>quantity :{{$bufashItem->item_qty}}</h2>
-                  <textarea name="description" class="col-md-3" style="width:320px;height:50px;">{{$bufashItem->item_desc}}</textarea>
+                  @if($bufashItem->item_qty <= 0)
+                  <p>out of stock</p>
+                  @endif
+                  <!--h2>Quantity :{{$bufashItem->item_qty}}</h2-->
+                  <p name="description" class="col-md-3" style="width:320px;height:50px;">{{$bufashItem->item_desc}}</p>
                 </div>
                 <div class="container">
                   @if($bufashItem->id)

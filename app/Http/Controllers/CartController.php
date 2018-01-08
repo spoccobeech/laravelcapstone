@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BufashItems;
+use App\BufashShippingInfo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -90,5 +91,10 @@ class CartController extends Controller
       // $bufashItems->item_qty = $bufashItems->item_qty - $itemQuantity;
       // $addtoCart = Cart::add($id, $bufashItems->item_name, $shoppingCart, $bufashItems->item_price);
       // $cartItems = Cart::associate($addtoCart->rowId, 'BufashItems');
+    }
+
+    public function shippingInfo(Request $request)
+    {
+
     }
 }

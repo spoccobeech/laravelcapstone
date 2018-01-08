@@ -8,8 +8,8 @@
       return view('../auth/register');
   });
 
-  Route::get('/checkout', function () {
-      return view('../bufash/cart/checkOut');
+  Route::get('/Billing', function () {
+      return view('../bufash/cart/billingAddress');
   });
 
   Route::get('/', function () {
@@ -43,6 +43,9 @@
 
     Route::resource('Items', 'ItemsController');
     Route::resource('Cart', 'CartController');
+    Route::resource('Shipping', 'ShippingController');
+
+    // ------------------ CART CONTROLLER ----------------------------
 
     Route::get('itemCart/{id}', [
       'uses' => 'CartController@store'// 'CartController@addCart '
@@ -55,21 +58,15 @@
     Route::get('Cart/{Cart}', [
       'uses' => 'CartController@destroy'// 'CartController@addCart '
     ]);
-        /*
-    Route::get('/itemCart', [
-     'uses' => 'CartItemController@index'// 'CartController@checkCart  ItemsController@getCart'
-    ]);
 
-    Route::get('/checkOutCart', [
-     'uses' => 'CartItemController@checkOut'// 'CartController@checkCart  ItemsController@getCart'
-    ]);
+    // -------------------------------------------------------------------
 
-    Route::get('/wishlist', [
-     'uses' => 'CartItemController@wishlist'// 'CartController@checkCart  ItemsController@getCart'
+    // ------------------ SHIPPING CONTROLLER ----------------------------
+    Route::get('Shipping', [
+      'uses' => 'ShippingController@index'
     ]);
-        */
   });
 
-  Auth::routes();
 
+  Auth::routes();
   Route::get('/homepage', 'HomeController@index');
