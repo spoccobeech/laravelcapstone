@@ -21,3 +21,37 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+$factory->define(App\BufashItems::class, function (Faker\Generator $faker) {
+    static $password;
+
+    return [
+        'user-id' => App\User::all()->random->id(),
+        'item_name' => $faker->name,
+        'item_type',
+        'item_desc',
+        'item_size',
+        'item_qty',
+        'item_stocks',
+        'item_desc',
+        'item_price',
+        'item_image'
+
+        /*
+        $table->increments('id');
+        $table->integer('user_id');
+        $table->string('rowId')->unique();
+        $table->string('item_name');
+        $table->string('item_type');
+        $table->string('item_size');
+        $table->string('item_qty');
+        $table->string('item_stocks');
+        $table->string('item_desc');
+        $table->string('item_price');
+        $table->string('item_image');
+        $table->rememberToken();
+        $table->timestamps();
+        */
+    ];
+});

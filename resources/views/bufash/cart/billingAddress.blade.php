@@ -18,17 +18,36 @@
         <input type="text" class="form-control" style="width:400px;" name="State_or_Province" placeholder="State / Province"><br/>
         <input type="text" class="form-control" style="width:400px;" name="Country" placeholder="Country"><br/>
         <input type="text" class="form-control" style="width:400px;" name="ZipCode" placeholder="Zip Code"><br/>
-        <button type="submit" name="button" class="btn btn-info">Proceed to Checkout</button>
+        <a href="{{ url('/Checkout') }}">
+          <button type="submit" name="button" class="btn btn-info">Proceed to Checkout</button>
+        </a>
       </form>
     </div>
     <div class="col-md-4">
-        @foreach(Cart::content() as $shipInfo)
-          @if( $shipInfo->id )
-            <img src="{{Storage::disk('local')->url($shipInfo->options->has('image') ? $shipInfo->options->image : '')}}" style="width:50px;height:50px;"/>
-            <h3>{{ $shipInfo->name }}</h3>
-            <h3>{{ $shipInfo->options->has('size') ? $shipInfo->options->size : ''}}</h3>
-          @endif
-        @endforeach
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Item Name</th>
+            <th scope="col">Item Quantity</th>
+            <th scope="col">Item Price</th>
+            <th scope="col">Item Size</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach(Cart::content() as $shipInfo)
+            <tr>
+              @if($shipInfo->id)
+                <td><img src="{{Storage::disk('local')->url($shipInfo->options->has('image') ? $shipInfo->options->image : '')}}" style="width:50px;height:50px;"/></td>
+                <td>{{$shipInfo->name}}</td>
+                <td>{{$shipInfo->qty}}</td>
+                <td>{{$shipInfo->price}}</td>
+                <td>{{$shipInfo->options->has('size') ? $shipInfo->options->size : ''}}</td>
+              @endif
+            </tr>
+            @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
   </body>

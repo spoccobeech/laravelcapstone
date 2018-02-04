@@ -40,7 +40,7 @@
               {{ Auth::user()->name }} <span class="caret"></span>
             </a>
             <div class="dropdown-menu">
-              <a href="#" class="nav-link">Wishlist</a>
+              <a href="#" class="nav-link">Wishlist ()</a>
               <a href="#" class="nav-link">Profile</a>
               <a href="{{ url('/logout') }}" class="dropdown-item nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

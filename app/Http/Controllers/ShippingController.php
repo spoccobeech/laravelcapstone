@@ -4,35 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BufashShippingInfo;
+use App\BufashItems;
+use Illuminate\Support\Facades\DB;
 
 class ShippingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('../bufash/cart/billingAddress');
+      //$shippingInfo = BufashShippingInfo::all();
+      return view('../bufash/cart/billingAddress');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
       $shippingInfo = new BufashShippingInfo;
@@ -45,49 +33,32 @@ class ShippingController extends Controller
       $shippingInfo->ZipCode = $request->ZipCode;
       $shippingInfo->Country = $request->Country;
       $shippingInfo->save();
-      return Response()->json(array('data' => $shippingInfo));
+      return redirect('/Checkout');
+
+      /*$userOrder = DB::table('bufash_items')
+            ->join('bufash_shipping_infos', 'bufash_items.id', '=', 'bufash_shipping_infos.bufash_items.id')
+            ->select('bufash_items.*', 'bufash_shipping_infos.Town', 'bufash_shipping_infos.Zone')
+            ->get();
+      return Response()->json(array('data' => $userOrder));
+      */
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+      $shippingDetail = BufashShippingInfo::findOrFail($id);
+      return view('../bufash/cart/checkOut', compact('shippingDetail'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

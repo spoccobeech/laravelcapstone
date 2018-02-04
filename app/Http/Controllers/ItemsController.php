@@ -19,11 +19,12 @@ class ItemsController extends Controller
     public function index()
     {
       // return bufashItems::all();
-      $bufashItems = BufashItems::all();
-      return view('bufash/items/viewItems', compact('bufashItems'));
+       $bufashItems = BufashItems::all();
+       return view('bufash/items/viewItems', compact('bufashItems'));
 
       // ----------- OTHER POSSIBLE OUTPUTS ----------------- //
       // return Response()->json(array('data' => $bufashItems));
+      // return BufashItems::all();
       // $bufashItems = Bufashitems::findOrFail($id);
       // $results = DB::select('select * from bufash_items where id = :id', ['id' => $bufashItems->id ]);
       // return view('../bufash/items/itemInfo', compact('$results'));
@@ -37,7 +38,11 @@ class ItemsController extends Controller
     public function store(Request $request)
     {
       // return view('bufash/products/viewProducts');
-      $bufashItems = new BufashItems;
+      $bufashItem = BufashItems::create($request->all());
+
+      return $request->all();
+
+      /* $bufashItems = new BufashItems;
       $bufashItems->id = $request->id;
       $bufashItems->item_name = $request->item_name;
       $bufashItems->item_type = $request->item_type;
@@ -73,14 +78,17 @@ class ItemsController extends Controller
       // return Response()->json();
       // return $bufashItems->toJson();
       return redirect('ItemsToShop');
+      */
     }
 
     public function show($id)
     {
       $bufashItems = BufashItems::findOrFail($id); //bufashItems::findOrFail($id);
-      return view('../bufash/items/viewItems' , compact('bufashItems'));
+      // return $request->all();
+      // return view('../bufash/items/viewItems' , compact('bufashItems'));
       // $images = DB::table('item_image')->whereIn('id', $bufashItems->id)->get(); // not fixed
-      // return Response()->json(array('data' => $bufashItems));
+      return Response()->json(array('data' => $bufashItems));
+      // return $request->$id;
     }
 
     public function edit($id)
@@ -101,15 +109,15 @@ class ItemsController extends Controller
     public function destroy($id)
     {
       $bufashItems = BufashItems::findOrFail($id);
-      $bufashItems->delete();
-      //return view('bufashaccts.allAccounts', compact('bfaccounts'));
-      return redirect('/Items');
-    }
+      // $bufashItems->delete();
+      // return view('bufashaccts.allAccounts', compact('bfaccounts'));
+      // return redirect('/Items');
+      try {
+          $bufashItems::destroy($id);
+      } catch (Exception $e) {
+        return response('Error' + e);
+      }
 
-     public function showImage(Request $request)
-    {
-      // $bufashItems = BufashItems::with('item_image')->get();
-      // return view('ItemstoShop')->with(['itemImage' => $bufashItems]);
     }
 
     public function addtoCart(Request $request, $id)

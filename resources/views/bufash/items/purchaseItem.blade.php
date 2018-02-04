@@ -16,8 +16,8 @@
                 @endif
                 <div class="container">
                   <h3>Item : {{$bufashItem->item_name}}</h3>
-                  <h2>Item Type :{{$bufashItem->item_type}}</h2>
-                  <h2>price :{{$bufashItem->item_price}}</h2>
+                  <h2>Item Type : {{$bufashItem->item_type}}</h2>
+                  <h2>price : {{$bufashItem->item_price}}</h2>
                   @if($bufashItem->item_qty <= 0)
                   <p>out of stock</p>
                   @endif

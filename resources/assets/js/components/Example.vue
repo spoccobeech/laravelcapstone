@@ -8,6 +8,7 @@
                     <div class="panel-body">
                         I'm an example component!
                     </div>
+                    <h1>Hi</h1>
                 </div>
             </div>
         </div>

@@ -16,7 +16,8 @@ class BufashItems extends Migration
 
       Schema::create('BufashItems', function (Blueprint $table) {
         $table->increments('id');
-        // $table->string('rowId')->unique();
+        $table->integer('user_id');
+        $table->string('rowId')->unique();
         $table->string('item_name');
         $table->string('item_type');
         $table->string('item_size');
